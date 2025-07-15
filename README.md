@@ -62,6 +62,14 @@ Expected services:
 kubectl get svc -A
 ```
 
+## 📂 Kubeconfig
+
+After install, a local `kubeconfig` file is created:
+
+```bash
+export KUBECONFIG=$(pwd)/kubeconfig
+kubectl get nodes
+
 ---
 
 ## 🛠 Troubleshooting
@@ -88,3 +96,4 @@ After the setup:
 - `.env` support for custom config
 - Skip components via flags (e.g., `--no-registry`)
 - Remote YAMLs from GitHub/CDN
+

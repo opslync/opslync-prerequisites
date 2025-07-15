@@ -65,3 +65,17 @@ kubectl apply -f manifests/trafek.yaml
 
 print_step "✅ All prerequisites installed successfully!"
 echo -e "\nTo verify, run: \nkubectl get pods -A"
+
+print_step "🔑 Exporting Kubeconfig"
+
+K3S_CONFIG_PATH="/etc/rancher/k3s/k3s.yaml"
+OUTPUT_KUBECONFIG="./kubeconfig"
+
+if [ -f "$K3S_CONFIG_PATH" ]; then
+  sudo cp "$K3S_CONFIG_PATH" "$OUTPUT_KUBECONFIG"
+  sudo chown $USER:$USER "$OUTPUT_KUBECONFIG"
+  echo -e "${GREEN}Saved kubeconfig to: ${OUTPUT_KUBECONFIG}${NC}"
+  echo "You can now run: export KUBECONFIG=$(pwd)/kubeconfig"
+else
+  echo "⚠️  K3s kubeconfig not found at $K3S_CONFIG_PATH"
+fi
