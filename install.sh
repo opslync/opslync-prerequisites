@@ -13,7 +13,18 @@ print_step() {
 print_step "[1/5] Checking if K3s is installed"
 if ! command -v k3s &> /dev/null && ! command -v kubectl &> /dev/null; then
   echo "K3s not found. Installing K3s..."
-  curl -sfL https://get.k3s.io | sh -
+
+  PUBLIC_IP=$(curl -s ifconfig.me)
+  TOKEN="UbvEc4BpB5YaqEVdqrS81yt/+wSReOaM" # replace if needed
+
+  curl -sfL https://get.k3s.io | sh -s - server \
+    --disable traefik \
+    --write-kubeconfig-mode=644 \
+    --node-name="$(hostname -f)" \
+    --kubelet-arg="cloud-provider=external" \
+    --tls-san="${PUBLIC_IP}" \
+    --token="${TOKEN}"
+
 else
   echo "K3s already installed. Skipping."
 fi
