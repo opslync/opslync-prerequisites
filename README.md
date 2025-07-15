@@ -15,7 +15,7 @@ This setup script installs the core dependencies needed for running the Opslync 
 
 ### 1. Clone This Repository
 ```bash
-git clone https://github.com/YOUR_ORG/opslync-prerequisites.git
+git clone https://github.com/opslync/opslync-prerequisites.git
 cd opslync-prerequisites
 ```
 
